@@ -36,6 +36,5 @@ class room_guide(Base):
     room=Column(String(5000), nullable=False)
     guide_id=Column(String(500), primary_key=True)
 
-engine = create_engine(
-  'sqlite:///site.dp')
+engine = create_engine( 'postgresql://directme:directme@localhost/directme')
 Base.metadata.create_all(engine)

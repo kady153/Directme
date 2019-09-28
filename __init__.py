@@ -394,4 +394,4 @@ def schedule_date(other_enduser,room):
     user_profile = session.query(User).filter_by(id=userinfo["user_id"]).first()
     return render_template("calender.html",userinfo=user_profile,send_img="send_img",other_enduser=other_enduser1,room=room,user_id=userinfo['user_id'])
 if __name__ == '__main__':
-    socketio.run(app,debug=True,host='0.0.0.0', port=8080)
+    socketio.run()

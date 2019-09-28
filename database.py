@@ -1,4 +1,5 @@
 import sys
+sys.path.insert(0, "/var/www/directme/Directme/venv3/lib/python3.5/site-packages") 
 import os
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base

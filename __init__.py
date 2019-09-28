@@ -243,12 +243,12 @@ def callback_handling():
             session.add(new_user)
             session.commit()
 
-    return redirect('/')
+    return redirect('http://134.209.189.36/')
 
 
 @app.route('/login')
 def login():
-    return auth0.authorize_redirect(redirect_uri='http://localhost:8080/callback', audience='https://directme.auth0.com/userinfo')
+    return auth0.authorize_redirect(redirect_uri='http://134.209.189.36/callback', audience='https://directme.auth0.com/userinfo')
 
 
 @app.route('/dashboard')

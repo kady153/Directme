@@ -5,7 +5,6 @@ import os
 from os import environ as env
 from functools import wraps
 from datetime import datetime
-from dotenv import load_dotenv, find_dotenv
 from werkzeug.exceptions import HTTPException
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine, asc
@@ -29,7 +28,7 @@ import http.client
 
 app = Flask(__name__)
 app.config['SECRET_KEY']='15324'
-engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+engine = create_engine( 'postgresql://directme:159357@localhost/directme')
 Base.metadata.bind = engine
 
 # uploads images
@@ -85,7 +84,7 @@ def chat(guide_id):
         session.commit()
         message_from=userinfo['user_id']
         send((msgs,userinfo['user_id'],datetime.utcnow().strftime('%Y-%m-%d %H:%M')),broadcast=True,room=userinfo['user_id']+var)
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
     print(guide_id)
     DBSession = sessionmaker(bind=engine)
@@ -128,7 +127,7 @@ def continuechat(room):
         session.add(newmsg)
         session.commit()
         send((msg,userinfo['user_id'],datetime.utcnow().strftime('%Y-%m-%d %H:%M')),broadcast=True,room=room)
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
     DBSession1 = sessionmaker(bind=engine)
     session1 = DBSession1()
@@ -156,7 +155,7 @@ def site():
 @requires_auth
 def profile(user_id):
     userinfo=login_session['profile']
-    engine = create_engine('sqlite:///site.db')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
 
     DBSession = sessionmaker(bind=engine)
@@ -170,7 +169,7 @@ def profile(user_id):
 @requires_auth
 def editprofile():
     userinfo=login_session['profile']
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
 
     DBSession = sessionmaker(bind=engine)
@@ -284,7 +283,7 @@ def choose_city():
 @app.route('/user_city',methods=['GET', 'POST'])
 @requires_auth
 def user_city():
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
 
     DBSession = sessionmaker(bind=engine)
@@ -304,7 +303,7 @@ def user_city():
 @requires_auth
 def become_guide():
     if request.method == 'GET':
-        engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+        engine = create_engine( 'postgresql://directme:159357@localhost/directme')
         Base.metadata.bind = engine
         DBSession = sessionmaker(bind=engine)
         session = DBSession()	
@@ -312,7 +311,7 @@ def become_guide():
         connected_user = session.query(User).filter_by(id=userinfo["user_id"]).first()
         return render_template('become_guide.html',userinfo=userinfo,send_img="send_img",connected_user=connected_user,user_id=userinfo['user_id'])
     if request.method == 'POST':
-        engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+        engine = create_engine( 'postgresql://directme:159357@localhost/directme')
         Base.metadata.bind = engine
 
         DBSession = sessionmaker(bind=engine)
@@ -330,7 +329,7 @@ def become_guide():
 @requires_auth
 def guide_list():
 	
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
 
     DBSession = sessionmaker(bind=engine)
@@ -348,7 +347,7 @@ def guide_list():
 @app.route('/filter_city',methods=['GET','POST'])
 @requires_auth
 def filter_city():
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
 
     DBSession = sessionmaker(bind=engine)
@@ -367,7 +366,7 @@ def filter_city():
 @app.route('/chat_rooms')
 @requires_auth
 def chat_rooms():
-    engine = create_engine( 'postgresql://directme:directme@localhost/directme')
+    engine = create_engine( 'postgresql://directme:159357@localhost/directme')
     Base.metadata.bind = engine
    
     DBSession = sessionmaker(bind=engine)
